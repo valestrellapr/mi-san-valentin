@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Para el amor de mi vida ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --pink-primary: #ff4d6d;
+            --pink-light: #ffccd5;
+            --text-color: #d63384;
+        }
+
         body {
             margin: 0;
             display: flex;
@@ -18,75 +24,120 @@
         }
 
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
             text-align: center;
-            max-width: 400px;
-            width: 90%;
-            transition: all 0.5s ease;
+            max-width: 450px;
+            width: 85%;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        .hidden { display: none; opacity: 0; transform: translateY(20px); }
+
+        /* Estilo de la Carta */
         .letter-text {
             font-family: 'Dancing Script', cursive;
             font-size: 1.5rem;
-            color: #d63384;
+            color: var(--text-color);
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            text-align: left;
         }
 
-        .hidden { display: none; }
+        /* Estilo de la Galería */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--pink-light);
+        }
 
-        button {
-            background-color: #ff4d6d;
+        /* Botones */
+        .btn-main {
+            background-color: var(--pink-primary);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 14px 28px;
+            border-radius: 30px;
             font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
             transition: 0.3s;
         }
 
-        button:hover { transform: scale(1.05); background-color: #ff758f; }
+        .btn-main:hover { transform: scale(1.05); background-color: #ff758f; }
 
-        #noBtn { background-color: #adb5bd; position: absolute; }
+        #noBtn { background-color: #adb5bd; position: absolute; box-shadow: none; z-index: 999; }
         
         .buttons-container {
             margin-top: 30px;
-            height: 50px;
+            height: 60px;
             position: relative;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
         
-        img { width: 150px; margin-bottom: 20px; border-radius: 15px; }
+        .main-gif { width: 160px; margin-bottom: 20px; border-radius: 20px; }
     </style>
 </head>
 <body>
 
     <div id="step1" class="container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" class="main-gif">
         <div class="letter-text">
-            "Hay momentos que se vuelven especiales por las personas con las que los compartimos. Quería decirte que cada detalle cuenta y que valoro mucho todo este tiempo..."
+            Sé que últimamente las cosas han sido complicadas para las dos y que hemos pasado por momentos difíciles. 
+            <br><br>
+            Pero a pesar de todo, quiero que sepas que nada de eso cambia lo que siento por ti. Te amo con todo mi corazón, y para mí, eres y siempre serás el amor de mi vida. 
+            <br><br>
+            ¿Me dejas seguir demostrándotelo?
         </div>
-        <button onclick="nextStep()">Continuar ❤️</button>
+        <button class="btn-main" onclick="showStep(2)">Continuar ❤️</button>
     </div>
 
     <div id="step2" class="container hidden">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif">
-        <h1 style="color: #d63384;">¿Quieres ser mi San Valentín?</h1>
+        <h2 style="color: var(--text-color);">Nuestros momentos...</h2>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500">
+            <img src="https://images.unsplash.com/photo-1516589174184-c68526614af0?q=80&w=500">
+            <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?q=80&w=500">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=500">
+        </div>
+        <button class="btn-main" onclick="showStep(3)">Haz clic aquí 👉</button>
+    </div>
+
+    <div id="step3" class="container hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif" class="main-gif">
+        <h1 style="color: var(--text-color); font-size: 1.8rem;">¿Quieres ser mi San Valentín?</h1>
         <div class="buttons-container">
-            <button id="yesBtn" onclick="celebrate()">¡SÍ! 😍</button>
-            <button id="noBtn">No 😢</button>
+            <button id="yesBtn" class="btn-main" onclick="celebrate()">¡SÍ! 😍</button>
+            <button id="noBtn" class="btn-main">No 😢</button>
         </div>
     </div>
 
     <script>
-        function nextStep() {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
+        function showStep(stepNumber) {
+            document.querySelectorAll('.container').forEach(c => {
+                c.classList.add('hidden');
+                setTimeout(() => c.style.display = 'none', 500);
+            });
+            
+            setTimeout(() => {
+                const nextStep = document.getElementById('step' + stepNumber);
+                nextStep.style.display = 'block';
+                setTimeout(() => nextStep.classList.remove('hidden'), 50);
+            }, 550);
         }
 
         const noBtn = document.getElementById('noBtn');
@@ -98,9 +149,8 @@
         });
 
         function celebrate() {
-            alert('¡Me haces muy feliz! ❤️');
-            // Aquí puedes poner el link a una canción o un video de ustedes
-            location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; 
+            alert('¡Me haces la persona más feliz del mundo! ❤️');
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; 
         }
     </script>
 </body>
