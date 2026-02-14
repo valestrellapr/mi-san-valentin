@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 { color: #d63384; font-size: 2.5rem; text-align: center; }
+        .buttons { margin-top: 20px; position: relative; width: 300px; height: 100px; display: flex; justify-content: center; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: 0.3s;
+            position: absolute;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; left: 20px; }
+        #noBtn { background-color: #888; color: white; right: 20px; }
+        img { width: 200px; border-radius: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Panda tierno">
+    
+    <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">¡SÍ! 😍</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        // El botón de "No" huye del cursor
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        });
+
+        // Lo que pasa cuando dice que SÍ
+        yesBtn.addEventListener('click', () => {
+            alert('¡Sabía que dirías que sí! Te quiero mucho ❤️');
+            location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // O el link a una canción especial
+        });
+    </script>
+</body>
+</html>
