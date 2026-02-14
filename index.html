@@ -16,33 +16,38 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Permite scroll desde arriba */
             min-height: 100vh;
             background: var(--bg-gradient);
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; /* Evita que el botón genere scroll al huir */
+            overflow-y: auto; /* Scroll habilitado por defecto */
+            padding: 20px 0;
+            box-sizing: border-box;
         }
+
+        /* Clase para bloquear scroll solo en la pregunta */
+        .no-scroll { overflow: hidden; height: 100vh; }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            padding: 30px;
             border-radius: 30px;
             box-shadow: 0 15px 40px rgba(214, 51, 132, 0.15);
             text-align: center;
-            max-width: 500px;
+            max-width: 450px;
             width: 85%;
             transition: all 0.5s ease;
-            position: relative;
+            margin: auto; /* Centra el contenido */
         }
 
         .hidden { display: none; opacity: 0; }
 
         .letter-text, .final-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--text-color);
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         .btn-main {
@@ -55,27 +60,27 @@
             font-weight: 500;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-            transition: transform 0.2s ease;
         }
 
         #noBtn {
             background-color: #adb5bd;
-            position: fixed; /* Necesario para que huya por toda la pantalla */
+            position: absolute; /* Cambiado a absolute para mejor control */
+            transition: 0.15s;
             z-index: 1000;
-            transition: 0.1s; /* Más rápido para que no lo atrapen */
         }
         
         .buttons-container {
-            margin-top: 40px;
-            height: 100px;
+            margin-top: 30px;
+            height: 150px; /* Más espacio para que el botón juegue */
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
         }
         
-        .main-gif { width: 160px; margin-bottom: 25px; border-radius: 20px; }
-        h1 { color: var(--text-color); font-size: 1.8rem; }
+        .main-gif { width: 150px; margin-bottom: 20px; border-radius: 20px; }
+        h1 { color: var(--text-color); font-size: 1.6rem; }
     </style>
 </head>
 <body>
@@ -95,7 +100,7 @@
     <div id="step2" class="container hidden">
         <img src="https://media.tenor.com/p5AAs72o_mMAAAAi/mocha-milk-and-mocha.gif" class="main-gif">
         <h1>¿Quieres ser mi San Valentín?</h1>
-        <div class="buttons-container">
+        <div class="buttons-container" id="area">
             <button id="yesBtn" class="btn-main" onclick="celebrate()">¡SÍ! 😍</button>
             <button id="noBtn" class="btn-main">No 😢</button>
         </div>
@@ -112,6 +117,9 @@
 
     <script>
         function showQuestion() {
+            // Bloqueamos el scroll solo aquí para que el botón no se pierda
+            document.body.classList.add('no-scroll');
+            
             document.getElementById('step1').classList.add('hidden');
             setTimeout(() => {
                 document.getElementById('step1').style.display = 'none';
@@ -122,26 +130,30 @@
         }
 
         const noBtn = document.getElementById('noBtn');
+        const area = document.getElementById('area');
 
         function moveButton() {
-            // Calcula posiciones aleatorias dentro del área visible
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+            // El botón ahora solo se mueve dentro del área de la tarjeta para que no se salga de la pantalla
+            const maxX = area.clientWidth - noBtn.offsetWidth;
+            const maxY = area.clientHeight - noBtn.offsetHeight;
+            
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
             
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
 
-        // Huye al pasar el mouse
         noBtn.addEventListener('mouseenter', moveButton);
-        // Huye al intentar tocar en el celular
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveButton();
         });
 
         function celebrate() {
+            // Devolvemos el scroll por si el mensaje final es largo
+            document.body.classList.remove('no-scroll');
+            
             document.getElementById('step2').classList.add('hidden');
             setTimeout(() => {
                 document.getElementById('step2').style.display = 'none';
