@@ -37,17 +37,14 @@
 
         .hidden { display: none; opacity: 0; transform: translateY(30px); }
 
-        /* Estilo de la Carta */
         .letter-text {
             font-family: 'Dancing Script', cursive;
             font-size: 1.6rem;
             color: var(--text-color);
             line-height: 1.6;
             margin-bottom: 30px;
-            text-align: center;
         }
 
-        /* Botones */
         .btn-main {
             background-color: var(--pink-primary);
             color: white;
@@ -75,19 +72,15 @@
             gap: 20px;
         }
         
-        .main-gif { width: 150px; margin-bottom: 25px; border-radius: 20px; }
+        .main-gif { width: 180px; height: auto; margin-bottom: 25px; border-radius: 20px; }
 
-        h1 {
-            color: var(--text-color);
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+        h1 { color: var(--text-color); font-size: 2rem; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <div id="step1" class="container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" class="main-gif">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" class="main-gif" onerror="this.src='https://media.tenor.com/7D-N5S6L-XoAAAAi/tkthao219-bubududu.gif'">
         <div class="letter-text">
             Sé que últimamente las cosas han sido complicadas para las dos y que hemos pasado por momentos difíciles. 
             <br><br>
@@ -99,7 +92,7 @@
     </div>
 
     <div id="step2" class="container hidden">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif" class="main-gif">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif" class="main-gif" onerror="this.src='https://media.tenor.com/p5AAs72o_mMAAAAi/mocha-milk-and-mocha.gif'">
         <h1>¿Quieres ser mi San Valentín?</h1>
         <div class="buttons-container">
             <button id="yesBtn" class="btn-main" onclick="celebrate()">¡SÍ! 😍</button>
@@ -109,7 +102,6 @@
 
     <script>
         function showQuestion() {
-            // Animación de salida del paso 1
             const s1 = document.getElementById('step1');
             s1.style.opacity = '0';
             s1.style.transform = 'translateY(-20px)';
@@ -118,7 +110,6 @@
                 s1.style.display = 'none';
                 const s2 = document.getElementById('step2');
                 s2.style.display = 'block';
-                // Pequeño delay para que la animación de entrada funcione
                 setTimeout(() => {
                     s2.style.opacity = '1';
                     s2.style.transform = 'translateY(0)';
@@ -127,9 +118,7 @@
         }
 
         const noBtn = document.getElementById('noBtn');
-        // El botón de "No" huye en computadoras
         noBtn.addEventListener('mouseover', moveButton);
-        // El botón de "No" huye en pantallas táctiles
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveButton();
@@ -144,9 +133,11 @@
 
         function celebrate() {
             alert('¡Me haces la persona más feliz! ❤️');
-            // Aquí puedes poner una canción de Spotify o YouTube que signifique algo para ambas
             window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; 
         }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
