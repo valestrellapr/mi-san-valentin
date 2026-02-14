@@ -3,51 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi San Valentín? ❤️</title>
+    <title>Para ti ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #ffe6e6;
-            font-family: 'Arial', sans-serif;
             margin: 0;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce4ec 0%, #ffc1e3 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
         }
-        h1 { color: #d63384; font-size: 2.5rem; text-align: center; }
-        .buttons { margin-top: 20px; position: relative; width: 300px; height: 100px; display: flex; justify-content: center; }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.5s ease;
+        }
+
+        .letter-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #d63384;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hidden { display: none; }
+
         button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
+            background-color: #ff4d6d;
+            color: white;
             border: none;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
             transition: 0.3s;
-            position: absolute;
         }
-        #yesBtn { background-color: #ff4d6d; color: white; left: 20px; }
-        #noBtn { background-color: #888; color: white; right: 20px; }
-        img { width: 200px; border-radius: 20px; margin-bottom: 20px; }
+
+        button:hover { transform: scale(1.05); background-color: #ff758f; }
+
+        #noBtn { background-color: #adb5bd; position: absolute; }
+        
+        .buttons-container {
+            margin-top: 30px;
+            height: 50px;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        img { width: 150px; margin-bottom: 20px; border-radius: 15px; }
     </style>
 </head>
 <body>
 
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Panda tierno">
-    
-    <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+    <div id="step1" class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        <div class="letter-text">
+            "Hay momentos que se vuelven especiales por las personas con las que los compartimos. Quería decirte que cada detalle cuenta y que valoro mucho todo este tiempo..."
+        </div>
+        <button onclick="nextStep()">Continuar ❤️</button>
+    </div>
 
-    <div class="buttons">
-        <button id="yesBtn">¡SÍ! 😍</button>
-        <button id="noBtn">No 😢</button>
+    <div id="step2" class="container hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif">
+        <h1 style="color: #d63384;">¿Quieres ser mi San Valentín?</h1>
+        <div class="buttons-container">
+            <button id="yesBtn" onclick="celebrate()">¡SÍ! 😍</button>
+            <button id="noBtn">No 😢</button>
+        </div>
     </div>
 
     <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
+        function nextStep() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
 
-        // El botón de "No" huye del cursor
+        const noBtn = document.getElementById('noBtn');
         noBtn.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -55,11 +97,11 @@
             noBtn.style.top = `${y}px`;
         });
 
-        // Lo que pasa cuando dice que SÍ
-        yesBtn.addEventListener('click', () => {
-            alert('¡Sabía que dirías que sí! Te quiero mucho ❤️');
-            location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // O el link a una canción especial
-        });
+        function celebrate() {
+            alert('¡Me haces muy feliz! ❤️');
+            // Aquí puedes poner el link a una canción o un video de ustedes
+            location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; 
+        }
     </script>
 </body>
 </html>
