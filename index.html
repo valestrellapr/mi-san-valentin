@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para el amor de mi vida ❤️</title>
+    <title>Para mi amor ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --pink-primary: #ff4d6d;
-            --pink-light: #ffccd5;
             --text-color: #d63384;
             --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #ffc1e3 100%);
         }
@@ -21,7 +20,7 @@
             min-height: 100vh;
             background: var(--bg-gradient);
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden; /* Evita que el botón genere scroll al huir */
         }
 
         .container {
@@ -31,13 +30,14 @@
             box-shadow: 0 15px 40px rgba(214, 51, 132, 0.15);
             text-align: center;
             max-width: 500px;
-            width: 90%;
-            transition: all 0.6s ease;
+            width: 85%;
+            transition: all 0.5s ease;
+            position: relative;
         }
 
-        .hidden { display: none; opacity: 0; transform: translateY(30px); }
+        .hidden { display: none; opacity: 0; }
 
-        .letter-text {
+        .letter-text, .final-text {
             font-family: 'Dancing Script', cursive;
             font-size: 1.6rem;
             color: var(--text-color);
@@ -55,32 +55,33 @@
             font-weight: 500;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-            transition: 0.3s;
+            transition: transform 0.2s ease;
         }
 
-        .btn-main:hover { transform: scale(1.05); background-color: #ff758f; }
-
-        #noBtn { background-color: #adb5bd; position: absolute; box-shadow: none; }
+        #noBtn {
+            background-color: #adb5bd;
+            position: fixed; /* Necesario para que huya por toda la pantalla */
+            z-index: 1000;
+            transition: 0.1s; /* Más rápido para que no lo atrapen */
+        }
         
         .buttons-container {
             margin-top: 40px;
-            height: 70px;
-            position: relative;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
         }
         
-        .main-gif { width: 180px; height: auto; margin-bottom: 25px; border-radius: 20px; }
-
-        h1 { color: var(--text-color); font-size: 2rem; margin-bottom: 10px; }
+        .main-gif { width: 160px; margin-bottom: 25px; border-radius: 20px; }
+        h1 { color: var(--text-color); font-size: 1.8rem; }
     </style>
 </head>
 <body>
 
     <div id="step1" class="container">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" class="main-gif" onerror="this.src='https://media.tenor.com/7D-N5S6L-XoAAAAi/tkthao219-bubududu.gif'">
+        <img src="https://media.tenor.com/7D-N5S6L-XoAAAAi/tkthao219-bubududu.gif" class="main-gif">
         <div class="letter-text">
             Sé que últimamente las cosas han sido complicadas para las dos y que hemos pasado por momentos difíciles. 
             <br><br>
@@ -92,7 +93,7 @@
     </div>
 
     <div id="step2" class="container hidden">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRiZjE4amZ3Znd6dzFiaHh6Znd6dzFiaHh6Znd6dzFiaHh6Znd6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Lp71UqhcHh46SXM6zS/giphy.gif" class="main-gif" onerror="this.src='https://media.tenor.com/p5AAs72o_mMAAAAi/mocha-milk-and-mocha.gif'">
+        <img src="https://media.tenor.com/p5AAs72o_mMAAAAi/mocha-milk-and-mocha.gif" class="main-gif">
         <h1>¿Quieres ser mi San Valentín?</h1>
         <div class="buttons-container">
             <button id="yesBtn" class="btn-main" onclick="celebrate()">¡SÍ! 😍</button>
@@ -100,44 +101,55 @@
         </div>
     </div>
 
+    <div id="step3" class="container hidden">
+        <img src="https://media.tenor.com/7Yf0N_C_S_oAAAAi/love-mocha.gif" class="main-gif">
+        <div class="final-text">
+            ¡Sabía que dirías que sí! ❤️
+            <br><br>
+            Te amo mucho mi amor y ya cuando nos veamos te sorprenderé. ✨
+        </div>
+    </div>
+
     <script>
         function showQuestion() {
-            const s1 = document.getElementById('step1');
-            s1.style.opacity = '0';
-            s1.style.transform = 'translateY(-20px)';
-            
+            document.getElementById('step1').classList.add('hidden');
             setTimeout(() => {
-                s1.style.display = 'none';
+                document.getElementById('step1').style.display = 'none';
                 const s2 = document.getElementById('step2');
                 s2.style.display = 'block';
-                setTimeout(() => {
-                    s2.style.opacity = '1';
-                    s2.style.transform = 'translateY(0)';
-                }, 50);
+                setTimeout(() => s2.classList.remove('hidden'), 50);
             }, 500);
         }
 
         const noBtn = document.getElementById('noBtn');
-        noBtn.addEventListener('mouseover', moveButton);
+
+        function moveButton() {
+            // Calcula posiciones aleatorias dentro del área visible
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        // Huye al pasar el mouse
+        noBtn.addEventListener('mouseenter', moveButton);
+        // Huye al intentar tocar en el celular
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             moveButton();
         });
 
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-        }
-
         function celebrate() {
-            alert('¡Me haces la persona más feliz! ❤️');
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; 
+            document.getElementById('step2').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('step2').style.display = 'none';
+                const s3 = document.getElementById('step3');
+                s3.style.display = 'block';
+                setTimeout(() => s3.classList.remove('hidden'), 50);
+            }, 500);
         }
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
